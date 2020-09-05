@@ -8,7 +8,7 @@ public class HomeTaskApplication {
     public static void main(String[] args) {
         GenericRepository<Skill, Long> genericRepository = new SkillRepository();
         System.out.println(genericRepository.findAll());
-        System.out.println();
+        System.out.println("get by id");
 
         Skill skill = genericRepository.getById((long)4);
         System.out.println(skill);

@@ -98,7 +98,7 @@ public class SkillRepository implements GenericRepository<Skill, Long> {
 
     private void writeToFile(List<Skill> skills) throws IOException {
         Files.writeString(Paths.get(SKILLS_TXT), "");
-        skills.forEach(sk-> {
+        skills.forEach(sk -> {
             try {
                 Files.writeString(Paths.get(SKILLS_TXT), String.format("%d;%s%n", sk.getId(), sk.getName()), StandardOpenOption.APPEND);
             } catch (IOException e) {
@@ -110,18 +110,7 @@ public class SkillRepository implements GenericRepository<Skill, Long> {
     }
 
     private Long getNewId() {
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(SKILLS_TXT));
-            if (lines.isEmpty()) return 0L;
-            else {
-                Scanner scanner = new Scanner(lines.get(lines.size() - 1));
-                scanner.useDelimiter(DELIMITER);
-                return scanner.nextLong() + 1;
-            }
-        } catch (IOException e) {
-            System.out.println("Can't get last Id in skills.txt");
-            e.printStackTrace();
-        }
-        return 1L;
+        Skill skill = findAll().stream().reduce((first, second) -> second).orElse(null);
+        return skill != null ? skill.getId() + 1 : 1;
     }
 }
