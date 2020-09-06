@@ -1,9 +1,9 @@
 1;pascal
 2;html
 3;с#
-4;new skill
+4;PHP
 6;REACT
 7;PHP
 8;JAVA
 9;REACT
-10;SQL
+10;very

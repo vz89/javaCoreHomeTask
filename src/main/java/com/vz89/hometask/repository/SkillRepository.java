@@ -24,7 +24,7 @@ public class SkillRepository implements GenericRepository<Skill, Long> {
             Scanner scanner;
             for (String line : lines) {
                 scanner = new Scanner(line);
-                scanner.useDelimiter(";");
+                scanner.useDelimiter(DELIMITER);
                 if (scanner.nextLong() == id) {
                     skill.setId(id);
                     skill.setName(scanner.next());
@@ -63,7 +63,7 @@ public class SkillRepository implements GenericRepository<Skill, Long> {
     public Skill save(Skill skill) {
         Long id = getNewId();
         try {
-            Files.writeString(Paths.get(SKILLS_TXT), String.format("%d;%s", id, skill.getName()), StandardOpenOption.APPEND);
+            Files.writeString(Paths.get(SKILLS_TXT), String.format("%n%d;%s", id, skill.getName()), StandardOpenOption.APPEND);
         } catch (IOException e) {
             System.out.println("Can't save Skill to skills.txt");
             e.printStackTrace();
@@ -104,8 +104,6 @@ public class SkillRepository implements GenericRepository<Skill, Long> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(String.format("%d;%s", sk.getId(), sk.getName()));
-
         });
     }
 
