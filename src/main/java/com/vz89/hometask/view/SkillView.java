@@ -29,14 +29,14 @@ public class SkillView {
                 break;
             case ("update"):
                 IOService.write("Введите Id Skill'a, который хотите изменить");
-                Long id =  IOService.readLong();
+                Long id = IOService.readLong();
                 IOService.write("Введите новое наименование Skill'a");
                 String newName = IOService.read();
-                IOService.write(skillController.update(id,newName).toString());
+                IOService.write(skillController.update(id, newName).toString());
                 break;
             case ("delete"):
                 IOService.write("Введите Id Skill'a, который хотите удалить");
-                Long skillIdForDelete =  IOService.readLong();
+                Long skillIdForDelete = IOService.readLong();
                 skillController.delete(skillIdForDelete);
                 IOService.write("Удален элемент по Id " + skillIdForDelete);
                 break;
