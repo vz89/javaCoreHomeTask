@@ -15,32 +15,37 @@ public class AccountView {
         IOService.write("update - изменить cтатус существующего Account");
         IOService.write("delete - удалить существующий аккаунт Account");
 
-        String command = IOService.read();
-        switch (command) {
-            case ("getById"):
-                IOService.write("Введите Id: ");
-                IOService.write(accountController.getById(IOService.readLong()).toString());
-                break;
-            case ("findAll"):
-                IOService.write(accountController.findAll().toString());
-                break;
-            case ("create"):
-                IOService.write("Введите новый Account");
-                IOService.write(accountController.create(IOService.read()).toString() + " добавлена");
-                break;
-            case ("update"):
-                IOService.write("Введите Id Account'a, который хотите изменить");
-                Long id = IOService.readLong();
-                IOService.write("Введите новый статус Account'a");
-                AccountStatus accountStatus = AccountStatus.valueOf(IOService.read());
-                IOService.write(accountController.update(id, accountStatus).toString());
-                break;
-            case ("delete"):
-                IOService.write("Введите Id Skill'a, который хотите удалить");
-                id = IOService.readLong();
-                accountController.delete(id);
-                IOService.write("Удален элемент по Id " + id);
-                break;
+        String command = "";
+
+        while (!command.equals("exit")) {
+            command = IOService.read();
+            switch (command) {
+                case ("getById"):
+                    IOService.write("Введите Id: ");
+                    IOService.write(accountController.getById(IOService.readLong()).toString());
+                    break;
+                case ("findAll"):
+                    IOService.write(accountController.findAll().toString());
+                    break;
+                case ("create"):
+                    IOService.write("Введите новый Account");
+                    IOService.write(accountController.create(IOService.read()).toString() + " добавлена");
+                    break;
+                case ("update"):
+                    IOService.write("Введите Id Account'a, который хотите изменить");
+                    Long id = IOService.readLong();
+                    IOService.write("Введите новый статус Account'a");
+                    AccountStatus accountStatus = AccountStatus.valueOf(IOService.read());
+                    IOService.write(accountController.update(id, accountStatus).toString());
+                    break;
+                case ("delete"):
+                    IOService.write("Введите Id Skill'a, который хотите удалить");
+                    id = IOService.readLong();
+                    accountController.delete(id);
+                    IOService.write("Удален элемент по Id " + id);
+                    break;
+            }
         }
+
     }
 }
