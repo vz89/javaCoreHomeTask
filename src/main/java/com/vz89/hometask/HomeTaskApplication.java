@@ -1,6 +1,7 @@
 package main.java.com.vz89.hometask;
 
 import main.java.com.vz89.hometask.service.IOService;
+import main.java.com.vz89.hometask.view.AccountView;
 import main.java.com.vz89.hometask.view.SkillView;
 
 public class HomeTaskApplication {
@@ -27,13 +28,16 @@ public class HomeTaskApplication {
         System.out.println(genericRepository.findAll());
         System.out.println();*/
 
-        System.out.println("Введите сущность с которой будете работать: Skill, Account(в разработке), Developer(в разработке) ");
+        System.out.println("Введите сущность с которой будете работать: Skill, Account, Developer(в разработке) ");
         String entity = IOService.read();
         if (entity.equals("Skill")) {
             SkillView skillView = new SkillView();
             skillView.run();
         }
-
+        if (entity.equals("Account")) {
+            AccountView accountView = new AccountView();
+            accountView.run();
+        }
 
     }
 }
