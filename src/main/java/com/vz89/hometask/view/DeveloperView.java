@@ -3,7 +3,6 @@ package main.java.com.vz89.hometask.view;
 import main.java.com.vz89.hometask.controller.AccountController;
 import main.java.com.vz89.hometask.controller.DeveloperController;
 import main.java.com.vz89.hometask.controller.SkillController;
-import main.java.com.vz89.hometask.model.AccountStatus;
 import main.java.com.vz89.hometask.service.IOService;
 
 public class DeveloperView {
@@ -16,7 +15,8 @@ public class DeveloperView {
         IOService.write("getById - получить Developer по Id ");
         IOService.write("findAll - получить список всех Developers");
         IOService.write("create - создать нового Developer");
-        IOService.write("update - изменить существующего Developer");
+        IOService.write("update - изменить имя и фамилию существующего Developer");
+        IOService.write("updateSkills - изменить навыки Developer");
         IOService.write("delete - удалить существующего Developer");
 
         String command = "";
@@ -42,17 +42,27 @@ public class DeveloperView {
                     IOService.write("Выберите ID скиллов через запятую");
                     IOService.write(skillController.findAll().toString());
                     String skillString = IOService.read();
-                    IOService.write(developerController.create(firstName,lastName,accountId,skillString).toString() + " добавлен");
+                    IOService.write(developerController.create(firstName, lastName, accountId, skillString).toString() + " добавлен");
                     break;
                 case ("update"):
                     IOService.write("Введите Id Account'a, который хотите изменить");
                     Long id = IOService.readLong();
-                    IOService.write("Введите новый статус Account'a");
-                    AccountStatus accountStatus = AccountStatus.valueOf(IOService.read());
-                    IOService.write(developerController.update(id, accountStatus).toString());
+                    IOService.write("Введите имя");
+                    firstName = IOService.read();
+                    IOService.write("Введите фамилию");
+                    lastName = IOService.read();
+                    IOService.write(developerController.update(id, firstName, lastName).toString());
+                    break;
+                case ("updateSkills"):
+                    IOService.write("Введите Id Developera'a, который хотите изменить");
+                    id = IOService.readLong();
+                    IOService.write("Выберите ID скиллов через запятую");
+                    IOService.write(skillController.findAll().toString());
+                    skillString = IOService.read();
+                    IOService.write(developerController.updateSkill(id, skillString).toString());
                     break;
                 case ("delete"):
-                    IOService.write("Введите Id Skill'a, который хотите удалить");
+                    IOService.write("Введите Id Account'a, который хотите удалить");
                     id = IOService.readLong();
                     developerController.delete(id);
                     IOService.write("Удален элемент по Id " + id);

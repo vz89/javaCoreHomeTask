@@ -1,7 +1,5 @@
 package main.java.com.vz89.hometask.repository;
 
-import main.java.com.vz89.hometask.model.Account;
-import main.java.com.vz89.hometask.model.AccountStatus;
 import main.java.com.vz89.hometask.model.Developer;
 import main.java.com.vz89.hometask.model.Skill;
 
@@ -33,7 +31,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
                     developer.setFirstName(scanner.next());
                     developer.setLastName(scanner.next());
                     developer.setAccount(accountRepository.getById(scanner.nextLong()));
-                    developer.setSkills(parseSkills(scanner.next()));
+                    developer.setSkills(parseSkillsStringToSet(scanner.next()));
                     return developer;
                 }
             }
@@ -45,11 +43,11 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
         return null;
     }
 
-    private Set<Skill> parseSkills(String next) {
+    private Set<Skill> parseSkillsStringToSet(String next) {
         Set<Skill> skills = new HashSet<>();
         Scanner scanner = new Scanner(next);
         scanner.useDelimiter(",");
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
             skills.add(skillRepository.getById(scanner.nextLong()));
         }
         return skills;
@@ -69,7 +67,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
                 developer.setFirstName(scanner.next());
                 developer.setLastName(scanner.next());
                 developer.setAccount(accountRepository.getById(scanner.nextLong()));
-                developer.setSkills(parseSkills(scanner.next()));
+                developer.setSkills(parseSkillsStringToSet(scanner.next()));
                 Developer.add(developer);
             }
         } catch (IOException e) {
@@ -83,29 +81,59 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     public Developer save(Developer developer) {
         Long id = getNewId();
         try {
-            Files.writeString(Paths.get(DEVELOPER_TXT), String.format("%n%d;%s;%s;%s;%s", id,developer.getFirstName(), developer.getLastName(), developer.getAccount().getId(),parseSkillsToString(developer.getSkills()) ), StandardOpenOption.APPEND);
+            Files.writeString(Paths.get(DEVELOPER_TXT), String.format("%n%d;%s;%s;%s;%s", id, developer.getFirstName(), developer.getLastName(), developer.getAccount().getId(), parseSkillsSetToString(developer.getSkills())), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            System.out.println("Can't save Account to accounts.txt");
+            System.out.println("Can't save Developer to developers.txt");
             e.printStackTrace();
         }
         return developer;
     }
 
-    private String parseSkillsToString(Set<Skill> skills) {
+    private String parseSkillsSetToString(Set<Skill> skills) {
         return skills.stream().map(skill -> skill.getId().toString()).collect(Collectors.joining(","));
     }
 
     @Override
     public Developer update(Developer developer) {
-        return null;
+        List<Developer> developers = findAll().stream().map(developer1 -> {
+            if (developer1.getId().equals(developer.getId())) {
+                return developer;
+            } else return developer1;
+        }).collect(Collectors.toList());
+        try {
+            writeToFile(developers);
+        } catch (IOException e) {
+            System.out.println("Can't update " + developer + " Developer to developers.txt");
+        }
+        return developer;
+    }
+
+    private void writeToFile(List<Developer> developers) throws IOException {
+        Files.writeString(Paths.get(DEVELOPER_TXT), "");
+        developers.forEach(developer -> {
+            try {
+                Files.writeString(Paths.get(DEVELOPER_TXT), String.format("%d;%s;%s;%s;%s%n", developer.getId(), developer.getFirstName(), developer.getLastName(), developer.getAccount().getId(), parseSkillsSetToString(developer.getSkills())), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
-    public void deleteById(Long aLong) {
-
+    public void deleteById(Long id) {
+        List<Developer> developers = findAll().stream().filter(skill -> !skill.getId().equals(id)).collect(Collectors.toList());
+        try {
+            writeToFile(developers);
+        } catch (IOException e) {
+            System.out.println("Can't delete " + id + " Developer in developers.txt");
+        }
     }
+
     private Long getNewId() {
         Developer developer = findAll().stream().reduce((first, second) -> second).orElse(null);
         return developer != null ? developer.getId() + 1 : 1;
     }
+
 }
+
+

@@ -1,6 +1,5 @@
 package main.java.com.vz89.hometask.controller;
 
-import main.java.com.vz89.hometask.model.AccountStatus;
 import main.java.com.vz89.hometask.model.Developer;
 import main.java.com.vz89.hometask.model.Skill;
 import main.java.com.vz89.hometask.repository.*;
@@ -25,13 +24,8 @@ public class DeveloperController {
     }
 
 
-
-    public Developer update(Long id, AccountStatus accountStatus) {
-        return null;
-    }
-
     public void delete(Long id) {
-
+        developerRepository.deleteById(id);
     }
 
     public Developer create(String firstName, String lastName, Long accountId, String skillString) {
@@ -42,13 +36,31 @@ public class DeveloperController {
         developer.setSkills(parseSkills(skillString));
         return developerRepository.save(developer);
     }
+
     private Set<Skill> parseSkills(String skillString) {
         Set<Skill> skills = new HashSet<>();
         Scanner scanner = new Scanner(skillString);
-        scanner.useDelimiter(",");
-        while(scanner.hasNext()) {
-            skills.add(skillRepository.getById(scanner.nextLong()));
+        if (!skillString.contains(",")) skills.add(skillRepository.getById(Long.parseLong(skillString)));
+        else {
+            scanner.useDelimiter(",");
+            while (scanner.hasNext()) {
+                skills.add(skillRepository.getById(scanner.nextLong()));
+            }
         }
         return skills;
+    }
+
+    public Developer update(Long id, String firstName, String lastName) {
+        Developer developer = developerRepository.getById(id);
+        developer.setFirstName(firstName);
+        developer.setLastName(lastName);
+        return developerRepository.update(developer);
+    }
+
+    public Developer updateSkill(Long id, String skillString) {
+        Developer developer = developerRepository.getById(id);
+        Set<Skill> skills = parseSkills(skillString);
+        developer.setSkills(skills);
+        return developerRepository.update(developer);
     }
 }
