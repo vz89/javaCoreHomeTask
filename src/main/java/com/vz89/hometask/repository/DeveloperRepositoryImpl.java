@@ -46,9 +46,12 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     private Set<Skill> parseSkillsStringToSet(String next) {
         Set<Skill> skills = new HashSet<>();
         Scanner scanner = new Scanner(next);
-        scanner.useDelimiter(",");
-        while (scanner.hasNext()) {
-            skills.add(skillRepository.getById(scanner.nextLong()));
+        if (!next.contains(",")) skills.add(skillRepository.getById(Long.parseLong(next)));
+        else {
+            scanner.useDelimiter(",");
+            while (scanner.hasNext()) {
+                skills.add(skillRepository.getById(scanner.nextLong()));
+            }
         }
         return skills;
     }

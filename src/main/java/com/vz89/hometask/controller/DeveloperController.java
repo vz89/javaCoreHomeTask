@@ -33,11 +33,11 @@ public class DeveloperController {
         developer.setFirstName(firstName);
         developer.setLastName(lastName);
         developer.setAccount(accountRepository.getById(accountId));
-        developer.setSkills(parseSkills(skillString));
+        developer.setSkills(parseSkillsStringToSet(skillString));
         return developerRepository.save(developer);
     }
 
-    private Set<Skill> parseSkills(String skillString) {
+    private Set<Skill> parseSkillsStringToSet(String skillString) {
         Set<Skill> skills = new HashSet<>();
         Scanner scanner = new Scanner(skillString);
         if (!skillString.contains(",")) skills.add(skillRepository.getById(Long.parseLong(skillString)));
@@ -59,7 +59,7 @@ public class DeveloperController {
 
     public Developer updateSkill(Long id, String skillString) {
         Developer developer = developerRepository.getById(id);
-        Set<Skill> skills = parseSkills(skillString);
+        Set<Skill> skills = parseSkillsStringToSet(skillString);
         developer.setSkills(skills);
         return developerRepository.update(developer);
     }
