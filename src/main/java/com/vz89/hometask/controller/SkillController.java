@@ -22,7 +22,7 @@ public class SkillController {
     }
 
     public Skill update(Long id, String newName) {
-        return skillRepository.update(new Skill(id,newName));
+        return skillRepository.update(new Skill(id, newName));
     }
 
     public void delete(Long id) {

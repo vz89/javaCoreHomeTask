@@ -3,10 +3,9 @@ package main.java.com.vz89.hometask.controller;
 import main.java.com.vz89.hometask.model.Developer;
 import main.java.com.vz89.hometask.model.Skill;
 import main.java.com.vz89.hometask.repository.*;
+import main.java.com.vz89.hometask.utils.IOUtils;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
 public class DeveloperController {
@@ -33,22 +32,11 @@ public class DeveloperController {
         developer.setFirstName(firstName);
         developer.setLastName(lastName);
         developer.setAccount(accountRepository.getById(accountId));
-        developer.setSkills(parseSkillsStringToSet(skillString));
+        developer.setSkills(IOUtils.parseSkillsStringToSet(skillString,skillRepository));
         return developerRepository.save(developer);
     }
 
-    private Set<Skill> parseSkillsStringToSet(String skillString) {
-        Set<Skill> skills = new HashSet<>();
-        Scanner scanner = new Scanner(skillString);
-        if (!skillString.contains(",")) skills.add(skillRepository.getById(Long.parseLong(skillString)));
-        else {
-            scanner.useDelimiter(",");
-            while (scanner.hasNext()) {
-                skills.add(skillRepository.getById(scanner.nextLong()));
-            }
-        }
-        return skills;
-    }
+
 
     public Developer update(Long id, String firstName, String lastName) {
         Developer developer = developerRepository.getById(id);
@@ -59,7 +47,7 @@ public class DeveloperController {
 
     public Developer updateSkill(Long id, String skillString) {
         Developer developer = developerRepository.getById(id);
-        Set<Skill> skills = parseSkillsStringToSet(skillString);
+        Set<Skill> skills = IOUtils.parseSkillsStringToSet(skillString,skillRepository);
         developer.setSkills(skills);
         return developerRepository.update(developer);
     }

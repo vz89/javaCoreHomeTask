@@ -2,12 +2,16 @@ package main.java.com.vz89.hometask.repository;
 
 import main.java.com.vz89.hometask.model.Developer;
 import main.java.com.vz89.hometask.model.Skill;
+import main.java.com.vz89.hometask.utils.IOUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DeveloperRepositoryImpl implements DeveloperRepository {
@@ -31,7 +35,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
                     developer.setFirstName(scanner.next());
                     developer.setLastName(scanner.next());
                     developer.setAccount(accountRepository.getById(scanner.nextLong()));
-                    developer.setSkills(parseSkillsStringToSet(scanner.next()));
+                    developer.setSkills(IOUtils.parseSkillsStringToSet(scanner.next(), skillRepository));
                     return developer;
                 }
             }
@@ -39,21 +43,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
-    }
-
-    private Set<Skill> parseSkillsStringToSet(String next) {
-        Set<Skill> skills = new HashSet<>();
-        Scanner scanner = new Scanner(next);
-        if (!next.contains(",")) skills.add(skillRepository.getById(Long.parseLong(next)));
-        else {
-            scanner.useDelimiter(",");
-            while (scanner.hasNext()) {
-                skills.add(skillRepository.getById(scanner.nextLong()));
-            }
-        }
-        return skills;
     }
 
     @Override
@@ -70,7 +60,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
                 developer.setFirstName(scanner.next());
                 developer.setLastName(scanner.next());
                 developer.setAccount(accountRepository.getById(scanner.nextLong()));
-                developer.setSkills(parseSkillsStringToSet(scanner.next()));
+                developer.setSkills(IOUtils.parseSkillsStringToSet(scanner.next(), skillRepository));
                 Developer.add(developer);
             }
         } catch (IOException e) {
