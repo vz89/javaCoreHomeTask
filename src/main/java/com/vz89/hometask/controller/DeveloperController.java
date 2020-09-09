@@ -3,10 +3,11 @@ package main.java.com.vz89.hometask.controller;
 import main.java.com.vz89.hometask.model.Developer;
 import main.java.com.vz89.hometask.model.Skill;
 import main.java.com.vz89.hometask.repository.*;
-import main.java.com.vz89.hometask.utils.IOUtils;
+import main.java.com.vz89.hometask.service.IOService;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class DeveloperController {
     private DeveloperRepository developerRepository = new DeveloperRepositoryImpl();
@@ -32,10 +33,9 @@ public class DeveloperController {
         developer.setFirstName(firstName);
         developer.setLastName(lastName);
         developer.setAccount(accountRepository.getById(accountId));
-        developer.setSkills(IOUtils.parseSkillsStringToSet(skillString,skillRepository));
+        developer.setSkills(IOService.parseSkillsStringToSet(skillString, skillRepository.findAll().stream().collect(Collectors.toMap(Skill::getId, s -> s))));
         return developerRepository.save(developer);
     }
-
 
 
     public Developer update(Long id, String firstName, String lastName) {
@@ -47,7 +47,7 @@ public class DeveloperController {
 
     public Developer updateSkill(Long id, String skillString) {
         Developer developer = developerRepository.getById(id);
-        Set<Skill> skills = IOUtils.parseSkillsStringToSet(skillString,skillRepository);
+        Set<Skill> skills = IOService.parseSkillsStringToSet(skillString, skillRepository.findAll().stream().collect(Collectors.toMap(Skill::getId, s -> s)));
         developer.setSkills(skills);
         return developerRepository.update(developer);
     }

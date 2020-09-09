@@ -2,7 +2,7 @@ package main.java.com.vz89.hometask.repository;
 
 import main.java.com.vz89.hometask.model.Developer;
 import main.java.com.vz89.hometask.model.Skill;
-import main.java.com.vz89.hometask.utils.IOUtils;
+import main.java.com.vz89.hometask.service.IOService;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,7 +35,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
                     developer.setFirstName(scanner.next());
                     developer.setLastName(scanner.next());
                     developer.setAccount(accountRepository.getById(scanner.nextLong()));
-                    developer.setSkills(IOUtils.parseSkillsStringToSet(scanner.next(), skillRepository));
+                    developer.setSkills(IOService.parseSkillsStringToSet(scanner.next(), skillRepository.findAll().stream().collect(Collectors.toMap(Skill::getId, s -> s))));
                     return developer;
                 }
             }
@@ -60,7 +60,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
                 developer.setFirstName(scanner.next());
                 developer.setLastName(scanner.next());
                 developer.setAccount(accountRepository.getById(scanner.nextLong()));
-                developer.setSkills(IOUtils.parseSkillsStringToSet(scanner.next(), skillRepository));
+                developer.setSkills(IOService.parseSkillsStringToSet(scanner.next(), skillRepository.findAll().stream().collect(Collectors.toMap(Skill::getId, s -> s))));
                 Developer.add(developer);
             }
         } catch (IOException e) {
