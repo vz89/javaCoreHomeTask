@@ -1,0 +1,2 @@
+1;Vova;ACTIVE
+2;BOB;BANNED
