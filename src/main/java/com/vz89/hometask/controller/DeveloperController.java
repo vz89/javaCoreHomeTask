@@ -1,9 +1,9 @@
-package main.java.com.vz89.hometask.controller;
+package com.vz89.hometask.controller;
 
-import main.java.com.vz89.hometask.model.Developer;
-import main.java.com.vz89.hometask.model.Skill;
-import main.java.com.vz89.hometask.repository.*;
-import main.java.com.vz89.hometask.service.IOService;
+import com.vz89.hometask.model.Developer;
+import com.vz89.hometask.model.Skill;
+import com.vz89.hometask.repository.*;
+import com.vz89.hometask.service.IOService;
 
 import java.util.*;
 import java.util.stream.Collector;

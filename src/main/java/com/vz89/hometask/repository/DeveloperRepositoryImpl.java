@@ -1,8 +1,8 @@
-package main.java.com.vz89.hometask.repository;
+package com.vz89.hometask.repository;
 
-import main.java.com.vz89.hometask.model.Developer;
-import main.java.com.vz89.hometask.model.Skill;
-import main.java.com.vz89.hometask.service.IOService;
+import com.vz89.hometask.model.Developer;
+import com.vz89.hometask.model.Skill;
+import com.vz89.hometask.service.IOService;
 
 import java.io.IOException;
 import java.nio.file.Files;

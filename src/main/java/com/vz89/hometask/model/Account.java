@@ -1,4 +1,4 @@
-package main.java.com.vz89.hometask.model;
+package com.vz89.hometask.model;
 
 import java.util.Objects;
 

@@ -1,8 +1,8 @@
-package main.java.com.vz89.hometask.view;
+package com.vz89.hometask.view;
 
-import main.java.com.vz89.hometask.controller.AccountController;
-import main.java.com.vz89.hometask.model.AccountStatus;
-import main.java.com.vz89.hometask.service.IOService;
+import com.vz89.hometask.controller.AccountController;
+import com.vz89.hometask.model.AccountStatus;
+import com.vz89.hometask.service.IOService;
 
 public class AccountView {
     private AccountController accountController = new AccountController();

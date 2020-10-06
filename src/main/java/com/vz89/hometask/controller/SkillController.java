@@ -1,8 +1,8 @@
-package main.java.com.vz89.hometask.controller;
+package com.vz89.hometask.controller;
 
-import main.java.com.vz89.hometask.model.Skill;
-import main.java.com.vz89.hometask.repository.SkillRepository;
-import main.java.com.vz89.hometask.repository.SkillRepositoryImpl;
+import com.vz89.hometask.model.Skill;
+import com.vz89.hometask.repository.SkillRepository;
+import com.vz89.hometask.repository.SkillRepositoryImpl;
 
 import java.util.List;
 

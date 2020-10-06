@@ -1,9 +1,10 @@
-package main.java.com.vz89.hometask.view;
+package com.vz89.hometask.view;
 
-import main.java.com.vz89.hometask.controller.AccountController;
-import main.java.com.vz89.hometask.controller.DeveloperController;
-import main.java.com.vz89.hometask.controller.SkillController;
-import main.java.com.vz89.hometask.service.IOService;
+
+import com.vz89.hometask.controller.AccountController;
+import com.vz89.hometask.controller.DeveloperController;
+import com.vz89.hometask.controller.SkillController;
+import com.vz89.hometask.service.IOService;
 
 public class DeveloperView {
     private DeveloperController developerController = new DeveloperController();

@@ -1,7 +1,7 @@
-package main.java.com.vz89.hometask.repository;
+package com.vz89.hometask.repository;
 
-import main.java.com.vz89.hometask.model.Account;
-import main.java.com.vz89.hometask.model.AccountStatus;
+import com.vz89.hometask.model.Account;
+import com.vz89.hometask.model.AccountStatus;
 
 import java.io.IOException;
 import java.nio.file.Files;

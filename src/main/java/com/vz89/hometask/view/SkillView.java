@@ -1,7 +1,7 @@
-package main.java.com.vz89.hometask.view;
+package com.vz89.hometask.view;
 
-import main.java.com.vz89.hometask.controller.SkillController;
-import main.java.com.vz89.hometask.service.IOService;
+import com.vz89.hometask.controller.SkillController;
+import com.vz89.hometask.service.IOService;
 
 public class SkillView {
     private SkillController skillController = new SkillController();

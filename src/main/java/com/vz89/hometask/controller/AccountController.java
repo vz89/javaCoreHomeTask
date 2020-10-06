@@ -1,9 +1,9 @@
-package main.java.com.vz89.hometask.controller;
+package com.vz89.hometask.controller;
 
-import main.java.com.vz89.hometask.model.Account;
-import main.java.com.vz89.hometask.model.AccountStatus;
-import main.java.com.vz89.hometask.repository.AccountRepository;
-import main.java.com.vz89.hometask.repository.AccountRepositoryImpl;
+import com.vz89.hometask.model.Account;
+import com.vz89.hometask.model.AccountStatus;
+import com.vz89.hometask.repository.AccountRepository;
+import com.vz89.hometask.repository.AccountRepositoryImpl;
 
 import java.util.List;
 

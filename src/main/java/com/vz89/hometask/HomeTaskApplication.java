@@ -1,9 +1,9 @@
-package main.java.com.vz89.hometask;
+package com.vz89.hometask;
 
-import main.java.com.vz89.hometask.service.IOService;
-import main.java.com.vz89.hometask.view.AccountView;
-import main.java.com.vz89.hometask.view.DeveloperView;
-import main.java.com.vz89.hometask.view.SkillView;
+import com.vz89.hometask.service.IOService;
+import com.vz89.hometask.view.AccountView;
+import com.vz89.hometask.view.DeveloperView;
+import com.vz89.hometask.view.SkillView;
 
 public class HomeTaskApplication {
     public static void main(String[] args) {

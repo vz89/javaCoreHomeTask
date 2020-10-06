@@ -1,4 +1,4 @@
-package main.java.com.vz89.hometask.repository;
+package com.vz89.hometask.repository;
 
 import java.util.List;
 
