@@ -1,7 +1,5 @@
 package com.vz89.hometask.repository;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.vz89.hometask.model.Developer;
 import com.vz89.hometask.service.JsonService;
 
@@ -9,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final String DEVELOPERS_JSON = "developers.json";
 
     @Override
