@@ -5,8 +5,8 @@ import com.vz89.hometask.model.Skill;
 import com.vz89.hometask.repository.*;
 import com.vz89.hometask.service.IOService;
 
-import java.util.*;
-import java.util.stream.Collector;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DeveloperController {

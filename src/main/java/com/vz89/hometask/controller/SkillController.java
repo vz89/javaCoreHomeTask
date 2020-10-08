@@ -1,13 +1,14 @@
 package com.vz89.hometask.controller;
 
 import com.vz89.hometask.model.Skill;
+import com.vz89.hometask.repository.JsonSkillRepositoryImpl;
 import com.vz89.hometask.repository.SkillRepository;
 import com.vz89.hometask.repository.SkillRepositoryImpl;
 
 import java.util.List;
 
 public class SkillController {
-    private SkillRepository skillRepository = new SkillRepositoryImpl();
+    private SkillRepository skillRepository = new JsonSkillRepositoryImpl();
 
     public Skill getById(Long readLong) {
         return skillRepository.getById(readLong);

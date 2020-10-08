@@ -1,22 +1,22 @@
 [
   {
     "id": 2,
-    "name": "updated"
+    "name": "php"
   },
   {
     "id": 3,
-    "name": "Pretty good"
+    "name": "sql"
   },
   {
     "id": 4,
-    "name": "Pretty good"
+    "name": "java"
   },
   {
     "id": 5,
-    "name": "Pretty good"
+    "name": "js"
   },
   {
     "id": 6,
-    "name": "Pretty good"
+    "name": "c#"
   }
 ]

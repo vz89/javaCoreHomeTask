@@ -3,12 +3,12 @@ package com.vz89.hometask.controller;
 import com.vz89.hometask.model.Account;
 import com.vz89.hometask.model.AccountStatus;
 import com.vz89.hometask.repository.AccountRepository;
-import com.vz89.hometask.repository.AccountRepositoryImpl;
+import com.vz89.hometask.repository.JsonAccountRepositoryImpl;
 
 import java.util.List;
 
 public class AccountController {
-    private AccountRepository accountRepository = new AccountRepositoryImpl();
+    private AccountRepository accountRepository = new JsonAccountRepositoryImpl();
 
     public Account getById(Long id) {
         return accountRepository.getById(id);
