@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "firstName": "3",
+    "lastName": "4",
+    "skills": [
+      {
+        "id": 5,
+        "name": "js"
+      },
+      {
+        "id": 2,
+        "name": "php"
+      },
+      {
+        "id": 3,
+        "name": "sql"
+      }
+    ],
+    "account": {
+      "id": 3,
+      "name": "Hank",
+      "accountStatus": "BANNED"
+    }
+  }
+]

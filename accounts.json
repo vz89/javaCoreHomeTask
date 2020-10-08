@@ -1,0 +1,12 @@
+[
+  {
+    "id": 2,
+    "name": "Mike",
+    "accountStatus": "ACTIVE"
+  },
+  {
+    "id": 3,
+    "name": "Hank",
+    "accountStatus": "BANNED"
+  }
+]

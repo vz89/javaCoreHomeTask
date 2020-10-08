@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DeveloperController {
-    private DeveloperRepository developerRepository = new DeveloperRepositoryImpl();
-    private AccountRepository accountRepository = new AccountRepositoryImpl();
-    private SkillRepository skillRepository = new SkillRepositoryImpl();
+    private DeveloperRepository developerRepository = new JsonDeveloperRepositoryImpl();
+    private AccountRepository accountRepository = new JsonAccountRepositoryImpl();
+    private SkillRepository skillRepository = new JsonSkillRepositoryImpl();
 
 
     public Developer getById(Long id) {

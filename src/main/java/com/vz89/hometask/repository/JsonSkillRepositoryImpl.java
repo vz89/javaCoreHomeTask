@@ -29,7 +29,8 @@ public class JsonSkillRepositoryImpl implements SkillRepository {
     @Override
     public Skill save(Skill skill) {
         List<Skill> skills = getSkillsListFromJson();
-        skill.setId(skills.get(skills.size() - 1).getId() + 1);
+        if (skills.isEmpty()) skill.setId(1L);
+        else skill.setId(skills.get(skills.size() - 1).getId() + 1);
         skills.add(skill);
         writeJsonToFile(skills);
         return skill;

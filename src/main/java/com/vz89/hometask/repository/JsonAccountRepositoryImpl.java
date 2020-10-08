@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.vz89.hometask.model.Account;
 import com.vz89.hometask.model.AccountStatus;
-import com.vz89.hometask.model.Skill;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,8 +17,7 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
     private static final String ACCOUNTS_JSON = "accounts.json";
 
     @Override
-    public Account getById(Long id)
-    {
+    public Account getById(Long id) {
         List<Account> accounts = getAccountsListFromJson();
         return accounts.stream().filter(account -> account.getId().equals(id)).findFirst().get();
     }
@@ -32,7 +30,8 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
     @Override
     public Account save(Account account) {
         List<Account> accounts = getAccountsListFromJson();
-        account.setId(accounts.get(accounts.size() - 1).getId() + 1);
+        if (accounts.isEmpty()) account.setId(1L);
+        else account.setId(accounts.get(accounts.size() - 1).getId() + 1);
         account.setAccountStatus(AccountStatus.ACTIVE);
         accounts.add(account);
         writeJsonToFile(accounts);
@@ -40,10 +39,15 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account update(Account account)
-    {
+    public Account update(Account account) {
         List<Account> accounts = getAccountsListFromJson();
-        writeJsonToFile(accounts.stream().map(s -> s.getId().equals(account.getId()) ? account : s).collect(Collectors.toList()));
+        writeJsonToFile(accounts.stream().map(s -> {
+            if (s.getId().equals(account.getId())) {
+                account.setName(s.getName());
+                return account;
+            }
+            return s;
+        }).collect(Collectors.toList()));
         return account;
     }
 
@@ -62,7 +66,8 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
             e.printStackTrace();
             System.out.println("Can't read accounts.json");
         }
-        return gson.fromJson(skillsString, new TypeToken<List<Account>>(){}.getType());
+        return gson.fromJson(skillsString, new TypeToken<List<Account>>() {
+        }.getType());
     }
 
     private void writeJsonToFile(List<Account> accounts) {
