@@ -28,7 +28,7 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
         else account.setId(accounts.get(accounts.size() - 1).getId() + 1);
         account.setAccountStatus(AccountStatus.ACTIVE);
         accounts.add(account);
-        JsonService.writeJsonToFile(accounts,ACCOUNTS_JSON);
+        JsonService.writeJsonToFile(accounts, ACCOUNTS_JSON);
         return account;
     }
 
@@ -41,7 +41,7 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
                 return account;
             }
             return s;
-        }).collect(Collectors.toList()),ACCOUNTS_JSON);
+        }).collect(Collectors.toList()), ACCOUNTS_JSON);
         return account;
     }
 
@@ -49,6 +49,6 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
     public void deleteById(Long id) {
         List<Account> accounts = JsonService.getListFromJson(ACCOUNTS_JSON, Account.class);
         accounts.remove(getById(id));
-        JsonService.writeJsonToFile(accounts,ACCOUNTS_JSON);
+        JsonService.writeJsonToFile(accounts, ACCOUNTS_JSON);
     }
 }
