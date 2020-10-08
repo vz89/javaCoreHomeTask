@@ -2,12 +2,9 @@ package com.vz89.hometask.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.vz89.hometask.model.Developer;
+import com.vz89.hometask.service.JsonService;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,57 +14,36 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
 
     @Override
     public Developer getById(Long id) {
-        List<Developer> developers = getDevelopersListFromJson();
+        List<Developer> developers = JsonService.getListFromJson(DEVELOPERS_JSON, Developer.class);
         return developers.stream().filter(developer -> developer.getId().equals(id)).findFirst().get();
     }
 
     @Override
     public List<Developer> findAll() {
-        return getDevelopersListFromJson();
+        return JsonService.getListFromJson(DEVELOPERS_JSON, Developer.class);
     }
 
     @Override
     public Developer save(Developer developer) {
-        List<Developer> developers = getDevelopersListFromJson();
+        List<Developer> developers = JsonService.getListFromJson(DEVELOPERS_JSON, Developer.class);
         if (developers.isEmpty()) developer.setId(1L);
         else developer.setId(developers.get(developers.size() - 1).getId() + 1);
         developers.add(developer);
-        writeJsonToFile(developers);
+        JsonService.writeJsonToFile(developers, DEVELOPERS_JSON);
         return developer;
     }
 
     @Override
     public Developer update(Developer developer) {
-        List<Developer> developers = getDevelopersListFromJson();
-        writeJsonToFile(developers.stream().map(s -> s.getId().equals(developer.getId()) ? developer : s).collect(Collectors.toList()));
+        List<Developer> developers = JsonService.getListFromJson(DEVELOPERS_JSON, Developer.class);
+        JsonService.writeJsonToFile(developers.stream().map(s -> s.getId().equals(developer.getId()) ? developer : s).collect(Collectors.toList()), DEVELOPERS_JSON);
         return developer;
     }
 
     @Override
     public void deleteById(Long id) {
-        List<Developer> developers = getDevelopersListFromJson();
+        List<Developer> developers = JsonService.getListFromJson(DEVELOPERS_JSON, Developer.class);
         developers.remove(getById(id));
-        writeJsonToFile(developers);
-    }
-
-    private List<Developer> getDevelopersListFromJson() {
-        String skillsString = "";
-        try {
-            skillsString = Files.readString(Paths.get(DEVELOPERS_JSON));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Can't read developers.json");
-        }
-        return gson.fromJson(skillsString, new TypeToken<List<Developer>>() {
-        }.getType());
-    }
-
-    private void writeJsonToFile(List<Developer> developers) {
-        try {
-            Files.writeString(Paths.get(DEVELOPERS_JSON), gson.toJson(developers));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Can't write in developers.json");
-        }
+        JsonService.writeJsonToFile(developers, DEVELOPERS_JSON);
     }
 }
