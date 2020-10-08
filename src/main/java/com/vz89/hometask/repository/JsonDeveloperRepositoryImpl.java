@@ -56,7 +56,7 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
             skillsString = Files.readString(Paths.get(DEVELOPERS_JSON));
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Can't read skills.json");
+            System.out.println("Can't read developers.json");
         }
         return gson.fromJson(skillsString, new TypeToken<List<Developer>>() {
         }.getType());
@@ -67,7 +67,7 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
             Files.writeString(Paths.get(DEVELOPERS_JSON), gson.toJson(developers));
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Can't write in skills.json");
+            System.out.println("Can't write in developers.json");
         }
     }
 }
