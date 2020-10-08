@@ -1,7 +1,6 @@
 package com.vz89.hometask.service;
 
 import com.vz89.hometask.model.Skill;
-import com.vz89.hometask.repository.SkillRepository;
 
 import java.util.HashSet;
 import java.util.Map;
