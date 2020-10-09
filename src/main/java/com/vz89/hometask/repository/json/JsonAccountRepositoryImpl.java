@@ -1,14 +1,15 @@
-package com.vz89.hometask.repository;
+package com.vz89.hometask.repository.json;
 
 import com.vz89.hometask.model.Account;
 import com.vz89.hometask.model.AccountStatus;
+import com.vz89.hometask.repository.AccountRepository;
 import com.vz89.hometask.service.JsonService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonAccountRepositoryImpl implements AccountRepository {
-    private static final String ACCOUNTS_JSON = "accounts.json";
+    private static final String ACCOUNTS_JSON = "/accounts.json";
 
     @Override
     public Account getById(Long id) {

@@ -1,8 +1,11 @@
-package com.vz89.hometask.repository;
+package com.vz89.hometask.repository.io;
 
 import com.vz89.hometask.model.Skill;
+import com.vz89.hometask.repository.SkillRepository;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -13,14 +16,14 @@ import java.util.stream.Collectors;
 
 public class SkillRepositoryImpl implements SkillRepository {
 
-    private static final String SKILLS_TXT = "skills.txt";
+    private static final String SKILLS_TXT = "/skills.txt";
     private static final String DELIMITER = ";";
 
     @Override
     public Skill getById(Long id) {
         Skill skill = new Skill();
         try {
-            List<String> lines = Files.readAllLines(Paths.get(SKILLS_TXT));
+            List<String> lines = Files.readAllLines(Paths.get(getUri()));
             Scanner scanner;
             for (String line : lines) {
                 scanner = new Scanner(line);
@@ -31,7 +34,7 @@ public class SkillRepositoryImpl implements SkillRepository {
                     return skill;
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't getById Skill from skills.txt");
             e.printStackTrace();
         }
@@ -42,7 +45,7 @@ public class SkillRepositoryImpl implements SkillRepository {
     public List<Skill> findAll() {
         List<Skill> skills = new ArrayList<>();
         try {
-            List<String> lines = Files.readAllLines(Paths.get(SKILLS_TXT));
+            List<String> lines = Files.readAllLines(Paths.get(getUri()));
             Scanner scanner;
             for (String line : lines) {
                 scanner = new Scanner(line);
@@ -52,7 +55,7 @@ public class SkillRepositoryImpl implements SkillRepository {
                 skills.add(new Skill(skillId, skillName));
             }
 
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't findAll Skills from skills.txt");
             e.printStackTrace();
         }
@@ -63,8 +66,8 @@ public class SkillRepositoryImpl implements SkillRepository {
     public Skill save(Skill skill) {
         Long id = getNewId();
         try {
-            Files.writeString(Paths.get(SKILLS_TXT), String.format("%n%d;%s", id, skill.getName()), StandardOpenOption.APPEND);
-        } catch (IOException e) {
+            Files.writeString(Paths.get(getUri()), String.format("%n%d;%s", id, skill.getName()), StandardOpenOption.APPEND);
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't save Skill to skills.txt");
             e.printStackTrace();
         }
@@ -79,7 +82,7 @@ public class SkillRepositoryImpl implements SkillRepository {
         }).collect(Collectors.toList());
         try {
             writeToFile(skills);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't update " + skill + " Skill to skills.txt");
         }
         return skill;
@@ -90,18 +93,18 @@ public class SkillRepositoryImpl implements SkillRepository {
         List<Skill> skills = findAll().stream().filter(skill -> !skill.getId().equals(id)).collect(Collectors.toList());
         try {
             writeToFile(skills);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't delete " + id + " Skill to skills.txt");
         }
 
     }
 
-    private void writeToFile(List<Skill> skills) throws IOException {
-        Files.writeString(Paths.get(SKILLS_TXT), "");
+    private void writeToFile(List<Skill> skills) throws IOException, URISyntaxException {
+        Files.writeString(Paths.get(getUri()), "");
         skills.forEach(sk -> {
             try {
-                Files.writeString(Paths.get(SKILLS_TXT), String.format("%d;%s%n", sk.getId(), sk.getName()), StandardOpenOption.APPEND);
-            } catch (IOException e) {
+                Files.writeString(Paths.get(getUri()), String.format("%d;%s%n", sk.getId(), sk.getName()), StandardOpenOption.APPEND);
+            } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
         });
@@ -110,5 +113,9 @@ public class SkillRepositoryImpl implements SkillRepository {
     private Long getNewId() {
         Skill skill = findAll().stream().reduce((first, second) -> second).orElse(null);
         return skill != null ? skill.getId() + 1 : 1;
+    }
+
+    private URI getUri() throws URISyntaxException {
+        return SkillRepositoryImpl.class.getResource(SKILLS_TXT).toURI();
     }
 }

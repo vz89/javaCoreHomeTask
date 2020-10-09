@@ -3,6 +3,9 @@ package com.vz89.hometask.controller;
 import com.vz89.hometask.model.Developer;
 import com.vz89.hometask.model.Skill;
 import com.vz89.hometask.repository.*;
+import com.vz89.hometask.repository.json.JsonAccountRepositoryImpl;
+import com.vz89.hometask.repository.json.JsonDeveloperRepositoryImpl;
+import com.vz89.hometask.repository.json.JsonSkillRepositoryImpl;
 import com.vz89.hometask.service.IOService;
 
 import java.util.List;

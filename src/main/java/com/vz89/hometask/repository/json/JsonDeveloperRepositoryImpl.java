@@ -1,13 +1,14 @@
-package com.vz89.hometask.repository;
+package com.vz89.hometask.repository.json;
 
 import com.vz89.hometask.model.Developer;
+import com.vz89.hometask.repository.DeveloperRepository;
 import com.vz89.hometask.service.JsonService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
-    private static final String DEVELOPERS_JSON = "developers.json";
+    private static final String DEVELOPERS_JSON = "/developers.json";
 
     @Override
     public Developer getById(Long id) {

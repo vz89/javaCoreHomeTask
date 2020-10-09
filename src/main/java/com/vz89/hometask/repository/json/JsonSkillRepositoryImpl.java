@@ -1,13 +1,14 @@
-package com.vz89.hometask.repository;
+package com.vz89.hometask.repository.json;
 
 import com.vz89.hometask.model.Skill;
+import com.vz89.hometask.repository.SkillRepository;
 import com.vz89.hometask.service.JsonService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonSkillRepositoryImpl implements SkillRepository {
-    private static final String SKILLS_JSON = "skills.json";
+    private static final String SKILLS_JSON = "/skills.json";
 
     @Override
     public Skill getById(Long id) {

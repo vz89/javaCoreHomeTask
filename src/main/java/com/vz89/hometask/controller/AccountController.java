@@ -3,7 +3,7 @@ package com.vz89.hometask.controller;
 import com.vz89.hometask.model.Account;
 import com.vz89.hometask.model.AccountStatus;
 import com.vz89.hometask.repository.AccountRepository;
-import com.vz89.hometask.repository.JsonAccountRepositoryImpl;
+import com.vz89.hometask.repository.json.JsonAccountRepositoryImpl;
 
 import java.util.List;
 

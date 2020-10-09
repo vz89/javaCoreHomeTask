@@ -1,18 +1,9 @@
 package com.vz89.hometask;
 
-import com.google.gson.internal.bind.util.ISO8601Utils;
-import com.vz89.hometask.model.Account;
-import com.vz89.hometask.model.Skill;
-import com.vz89.hometask.repository.AccountRepository;
-import com.vz89.hometask.repository.JsonAccountRepositoryImpl;
-import com.vz89.hometask.repository.JsonSkillRepositoryImpl;
-import com.vz89.hometask.repository.SkillRepository;
 import com.vz89.hometask.service.IOService;
 import com.vz89.hometask.view.AccountView;
 import com.vz89.hometask.view.DeveloperView;
 import com.vz89.hometask.view.SkillView;
-
-import java.util.List;
 
 public class HomeTaskApplication {
     public static void main(String[] args) {

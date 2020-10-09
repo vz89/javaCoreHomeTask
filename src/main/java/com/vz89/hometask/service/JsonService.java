@@ -8,6 +8,7 @@ import com.vz89.hometask.model.Developer;
 import com.vz89.hometask.model.Skill;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -17,8 +18,8 @@ public class JsonService {
 
     public static void writeJsonToFile(List<?> list, String file) {
         try {
-            Files.writeString(Paths.get(file), gson.toJson(list));
-        } catch (IOException e) {
+            Files.writeString(Paths.get(JsonService.class.getResource(file).toURI()), gson.toJson(list));
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             System.out.println("Can't write in " + file);
         }
@@ -29,8 +30,8 @@ public class JsonService {
         TypeToken typeToken;
 
         try {
-            string = Files.readString(Paths.get(file));
-        } catch (IOException e) {
+            string = Files.readString(Paths.get(JsonService.class.getResource(file).toURI()));
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             System.out.println("Can't read " + file);
         }

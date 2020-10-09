@@ -1,9 +1,12 @@
-package com.vz89.hometask.repository;
+package com.vz89.hometask.repository.io;
 
 import com.vz89.hometask.model.Account;
 import com.vz89.hometask.model.AccountStatus;
+import com.vz89.hometask.repository.AccountRepository;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -14,14 +17,14 @@ import java.util.stream.Collectors;
 
 public class AccountRepositoryImpl implements AccountRepository {
 
-    private static final String ACCOUNTS_TXT = "accounts.txt";
+    private static final String ACCOUNTS_TXT = "/accounts.txt";
     private static final String DELIMITER = ";";
 
     @Override
     public Account getById(Long id) {
         Account account = new Account();
         try {
-            List<String> lines = Files.readAllLines(Paths.get(ACCOUNTS_TXT));
+            List<String> lines = Files.readAllLines(Paths.get(getUri()));
             Scanner scanner;
             for (String line : lines) {
                 scanner = new Scanner(line);
@@ -34,7 +37,7 @@ public class AccountRepositoryImpl implements AccountRepository {
                 }
             }
 
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
 
@@ -45,7 +48,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     public List<Account> findAll() {
         List<Account> accounts = new ArrayList<>();
         try {
-            List<String> lines = Files.readAllLines(Paths.get(ACCOUNTS_TXT));
+            List<String> lines = Files.readAllLines(Paths.get(getUri()));
             Scanner scanner;
             for (String line : lines) {
                 scanner = new Scanner(line);
@@ -55,7 +58,7 @@ public class AccountRepositoryImpl implements AccountRepository {
                 AccountStatus accountStatus = AccountStatus.valueOf(scanner.next());
                 accounts.add(new Account(accountId, accountName, accountStatus));
             }
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't findAll Accounts from accounts.txt");
             e.printStackTrace();
         }
@@ -66,8 +69,8 @@ public class AccountRepositoryImpl implements AccountRepository {
     public Account save(Account account) {
         Long id = getNewId();
         try {
-            Files.writeString(Paths.get(ACCOUNTS_TXT), String.format("%n%d;%s;%s", id, account.getName(), AccountStatus.ACTIVE), StandardOpenOption.APPEND);
-        } catch (IOException e) {
+            Files.writeString(Paths.get(getUri()), String.format("%n%d;%s;%s", id, account.getName(), AccountStatus.ACTIVE), StandardOpenOption.APPEND);
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't save Account to accounts.txt");
             e.printStackTrace();
         }
@@ -84,7 +87,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         }).collect(Collectors.toList());
         try {
             writeToFile(accounts);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't update " + account + " Account to accounts.txt");
         }
         return account;
@@ -95,7 +98,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         List<Account> accounts = findAll().stream().filter(skill -> !skill.getId().equals(id)).collect(Collectors.toList());
         try {
             writeToFile(accounts);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             System.out.println("Can't delete " + id + " Account in accounts.txt");
         }
     }
@@ -105,14 +108,18 @@ public class AccountRepositoryImpl implements AccountRepository {
         return account != null ? account.getId() + 1 : 1;
     }
 
-    private void writeToFile(List<Account> accounts) throws IOException {
-        Files.writeString(Paths.get(ACCOUNTS_TXT), "");
+    private void writeToFile(List<Account> accounts) throws IOException, URISyntaxException {
+        Files.writeString(Paths.get(getUri()), "");
         accounts.forEach(account -> {
             try {
-                Files.writeString(Paths.get(ACCOUNTS_TXT), String.format("%d;%s;%s%n", account.getId(), account.getName(), account.getAccountStatus()), StandardOpenOption.APPEND);
-            } catch (IOException e) {
+                Files.writeString(Paths.get(getUri()), String.format("%d;%s;%s%n", account.getId(), account.getName(), account.getAccountStatus()), StandardOpenOption.APPEND);
+            } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
         });
+    }
+
+    private URI getUri() throws URISyntaxException {
+        return AccountRepositoryImpl.class.getResource(ACCOUNTS_TXT).toURI();
     }
 }
