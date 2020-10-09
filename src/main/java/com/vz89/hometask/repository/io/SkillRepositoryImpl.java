@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class SkillRepositoryImpl implements SkillRepository {
 
-    private static final String SKILLS_TXT = "/skills.txt";
+    private static final String SKILLS_TXT = "/files/skills.txt";
     private static final String DELIMITER = ";";
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonSkillRepositoryImpl implements SkillRepository {
-    private static final String SKILLS_JSON = "/skills.json";
+    private static final String SKILLS_JSON = "/files/skills.json";
 
     @Override
     public Skill getById(Long id) {

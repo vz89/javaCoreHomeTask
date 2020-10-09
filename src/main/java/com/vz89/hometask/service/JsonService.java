@@ -3,8 +3,8 @@ package com.vz89.hometask.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.vz89.hometask.dto.DeveloperDTO;
 import com.vz89.hometask.model.Account;
-import com.vz89.hometask.model.Developer;
 import com.vz89.hometask.model.Skill;
 
 import java.io.IOException;
@@ -37,13 +37,16 @@ public class JsonService {
         }
         switch (tClass.getSimpleName()) {
             case "Skill":
-                typeToken = new TypeToken<List<Skill>>(){};
+                typeToken = new TypeToken<List<Skill>>() {
+                };
                 break;
-            case "Developer":
-                typeToken = new TypeToken<List<Developer>>(){};
+            case "DeveloperDTO":
+                typeToken = new TypeToken<List<DeveloperDTO>>() {
+                };
                 break;
-            case "Account" :
-                typeToken = new TypeToken<List<Account>>(){};
+            case "Account":
+                typeToken = new TypeToken<List<Account>>() {
+                };
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + tClass.getName());

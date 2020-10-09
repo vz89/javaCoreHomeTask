@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class AccountRepositoryImpl implements AccountRepository {
 
-    private static final String ACCOUNTS_TXT = "/accounts.txt";
+    private static final String ACCOUNTS_TXT = "/files/accounts.txt";
     private static final String DELIMITER = ";";
 
     @Override

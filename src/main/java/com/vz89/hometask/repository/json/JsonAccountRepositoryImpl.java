@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JsonAccountRepositoryImpl implements AccountRepository {
-    private static final String ACCOUNTS_JSON = "/accounts.json";
+    private static final String ACCOUNTS_JSON = "/files/accounts.json";
 
     @Override
     public Account getById(Long id) {

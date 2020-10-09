@@ -23,7 +23,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     private AccountRepository accountRepository = new AccountRepositoryImpl();
     private SkillRepository skillRepository = new SkillRepositoryImpl();
 
-    private static final String DEVELOPER_TXT = "/developers.txt";
+    private static final String DEVELOPER_TXT = "/files/developers.txt";
     private static final String DELIMITER = ";";
 
     @Override
