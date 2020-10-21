@@ -1,31 +1,31 @@
 package com.vz89.hometask.controller;
 
 import com.vz89.hometask.model.Skill;
-import com.vz89.hometask.repository.json.JsonSkillRepositoryImpl;
-import com.vz89.hometask.repository.SkillRepository;
+import com.vz89.hometask.service.SkillService;
+import com.vz89.hometask.service.SkillServiceImpl;
 
 import java.util.List;
 
 public class SkillController {
-    private SkillRepository skillRepository = new JsonSkillRepositoryImpl();
+    private SkillService skillService = new SkillServiceImpl();
 
     public Skill getById(Long readLong) {
-        return skillRepository.getById(readLong);
+        return skillService.getById(readLong);
     }
 
     public List<Skill> findAll() {
-        return skillRepository.findAll();
+        return skillService.findAll();
     }
 
     public Skill create(String skillName) {
-        return skillRepository.save(new Skill(skillName));
+        return skillService.save(skillName);
     }
 
     public Skill update(Long id, String newName) {
-        return skillRepository.update(new Skill(id, newName));
+        return skillService.update(id, newName);
     }
 
     public void delete(Long id) {
-        skillRepository.deleteById(id);
+        skillService.delete(id);
     }
 }
