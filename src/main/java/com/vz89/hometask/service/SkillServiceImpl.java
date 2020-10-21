@@ -2,12 +2,13 @@ package com.vz89.hometask.service;
 
 import com.vz89.hometask.model.Skill;
 import com.vz89.hometask.repository.SkillRepository;
+import com.vz89.hometask.repository.db.DbSkillRepositoryImpl;
 import com.vz89.hometask.repository.json.JsonSkillRepositoryImpl;
 
 import java.util.List;
 
 public class SkillServiceImpl implements SkillService {
-    private SkillRepository skillRepository = new JsonSkillRepositoryImpl();
+    private SkillRepository skillRepository = new DbSkillRepositoryImpl();
 
     @Override
     public Skill getById(Long readLong) {
