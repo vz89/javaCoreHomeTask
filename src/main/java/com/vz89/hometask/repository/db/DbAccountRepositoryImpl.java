@@ -1,7 +1,8 @@
 package com.vz89.hometask.repository.db;
 
-import com.vz89.hometask.model.Skill;
-import com.vz89.hometask.repository.SkillRepository;
+import com.vz89.hometask.model.Account;
+import com.vz89.hometask.model.AccountStatus;
+import com.vz89.hometask.repository.AccountRepository;
 import com.vz89.hometask.service.DbService;
 
 import java.sql.Connection;
@@ -11,23 +12,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbSkillRepositoryImpl implements SkillRepository {
+public class DbAccountRepositoryImpl implements AccountRepository {
     private static final String ID = "id";
-    private static final String SKILL_NAME = "skill_name";
+    private static final String ACCOUNT_NAME = "account_name";
+    private static final String ACCOUNT_STATUS = "account_status";
     private DbService dbService = new DbService();
     private Connection connection;
 
     @Override
-    public Skill getById(Long id) {
-        Skill skill = null;
+    public Account getById(Long id) {
+        Account account = null;
         try {
             connection = dbService.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM skill WHERE id='" + id + "'");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM account WHERE id='" + id + "'");
             while (resultSet.next()) {
                 Long skillId = resultSet.getLong(ID);
-                String name = resultSet.getString(SKILL_NAME);
-                skill = new Skill(skillId, name);
+                String name = resultSet.getString(ACCOUNT_NAME);
+                String status = resultSet.getString(ACCOUNT_STATUS);
+                account = new Account(skillId, name, AccountStatus.valueOf(status));
             }
             resultSet.close();
             statement.close();
@@ -35,20 +38,21 @@ public class DbSkillRepositoryImpl implements SkillRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return skill;
+        return account;
     }
 
     @Override
-    public List<Skill> findAll() {
-        List<Skill> skills = new ArrayList<>();
+    public List<Account> findAll() {
+        List<Account> accounts = new ArrayList<>();
         try {
             connection = dbService.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM skill");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM account");
             while (resultSet.next()) {
                 Long id = resultSet.getLong(ID);
-                String name = resultSet.getString(SKILL_NAME);
-                skills.add(new Skill(id, name));
+                String name = resultSet.getString(ACCOUNT_NAME);
+                String status = resultSet.getString(ACCOUNT_STATUS);
+                accounts.add(new Account(id, name, AccountStatus.valueOf(status)));
             }
             resultSet.close();
             statement.close();
@@ -56,36 +60,37 @@ public class DbSkillRepositoryImpl implements SkillRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return skills;
+        return accounts;
     }
 
     @Override
-    public Skill save(Skill skill) {
+    public Account save(Account account) {
         try {
             connection = dbService.getConnection();
             Statement statement = connection.createStatement();
-            statement.addBatch("Insert Into skill (skill_name) VALUES('" + skill.getName() + "')");
+            statement.addBatch("Insert Into account (account_name, account_status) VALUES('" + account.getName() + "','" + AccountStatus.ACTIVE + "')");
             statement.executeBatch();
             statement.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return skill;
+        account.setAccountStatus(AccountStatus.ACTIVE);
+        return account;
     }
 
     @Override
-    public Skill update(Skill skill) {
+    public Account update(Account account) {
         try {
             connection = dbService.getConnection();
             Statement statement = connection.createStatement();
-            statement.executeUpdate("UPDATE skill SET skill_name='" + skill.getId() + "' WHERE id='" + skill.getId() + "'");
+            statement.executeUpdate("UPDATE account SET account_name='" + account.getId() + "',account_status='" + account.getAccountStatus() + "' WHERE id='" + account.getId() + "'");
             statement.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return skill;
+        return account;
     }
 
     @Override
@@ -93,7 +98,7 @@ public class DbSkillRepositoryImpl implements SkillRepository {
         try {
             connection = dbService.getConnection();
             Statement statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM skill WHERE id='" + id + "'");
+            statement.executeUpdate("DELETE FROM account WHERE id='" + id + "'");
             statement.close();
             connection.close();
         } catch (SQLException e) {

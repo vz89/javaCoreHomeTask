@@ -10,9 +10,11 @@ import java.sql.SQLException;
 public class DbService {
     private PropertiesReader propertiesReader;
 
+    private static final String PROPERTY_FILE_NAME = "app.properties";
+
     {
         try {
-            propertiesReader = new PropertiesReader("app.properties");
+            propertiesReader = new PropertiesReader(PROPERTY_FILE_NAME);
         } catch (IOException e) {
             e.printStackTrace();
         }
