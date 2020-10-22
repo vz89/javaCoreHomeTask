@@ -46,7 +46,7 @@ public class DeveloperView {
                     IOService.write(developerController.create(firstName, lastName, accountId, skillString).toString() + " добавлен");
                     break;
                 case ("update"):
-                    IOService.write("Введите Id Account'a, который хотите изменить");
+                    IOService.write("Введите Id Developer'a, который хотите изменить");
                     Long id = IOService.readLong();
                     IOService.write("Введите имя");
                     firstName = IOService.read();
@@ -55,7 +55,7 @@ public class DeveloperView {
                     IOService.write(developerController.update(id, firstName, lastName).toString());
                     break;
                 case ("updateSkills"):
-                    IOService.write("Введите Id Developera'a, который хотите изменить");
+                    IOService.write("Введите Id Developer'a, который хотите изменить");
                     id = IOService.readLong();
                     IOService.write("Выберите ID скиллов через запятую");
                     IOService.write(skillController.findAll().toString());
@@ -63,7 +63,7 @@ public class DeveloperView {
                     IOService.write(developerController.updateSkill(id, skillString).toString());
                     break;
                 case ("delete"):
-                    IOService.write("Введите Id Account'a, который хотите удалить");
+                    IOService.write("Введите Id Developer'a, который хотите удалить");
                     id = IOService.readLong();
                     developerController.delete(id);
                     IOService.write("Удален элемент по Id " + id);

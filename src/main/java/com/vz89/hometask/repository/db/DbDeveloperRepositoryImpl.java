@@ -111,11 +111,37 @@ public class DbDeveloperRepositoryImpl implements DeveloperRepository {
 
     @Override
     public Developer update(Developer developer) {
-        return null;
+        try {
+            connection = dbService.getConnection();
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE developer " +
+                    "SET first_name='" + developer.getFirstName() + "', last_name='" + developer.getLastName() + "', account_id='" + developer.getAccount().getId()
+                    + "'  WHERE id='" + developer.getId() + "'");
+
+            statement.executeUpdate("DELETE FROM developer_skill WHERE developer_id='" + developer.getId()+ "'");
+            for (Skill skill : developer.getSkills()) {
+                statement.addBatch("INSERT INTO developer_skill (developer_id, skill_id) VALUES ('"
+                        + developer.getId() + "','" + skill.getId() + "')");
+            }
+            statement.executeBatch();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return developer;
     }
 
     @Override
-    public void deleteById(Long aLong) {
-
+    public void deleteById(Long id) {
+        try {
+            connection = dbService.getConnection();
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM developer WHERE id='" + id + "'");
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
