@@ -35,10 +35,10 @@
 
     <changeSet id="addForeignKeys" author="vladimir">
         <addForeignKeyConstraint baseTableName="developer" baseColumnNames="account_id" constraintName="fk_developer_account" referencedTableName="account"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="developer_skill" baseColumnNames="developer_id" constraintName="fk_developer_skill_developer" referencedTableName="developer"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id" onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="developer_skill" baseColumnNames="skill_id" constraintName="fk_developer_skill_skill" referencedTableName="skill"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id" onDelete="CASCADE"/>
     </changeSet>
 </databaseChangeLog>
