@@ -5,6 +5,9 @@ import com.vz89.hometask.model.Skill;
 import com.vz89.hometask.repository.AccountRepository;
 import com.vz89.hometask.repository.DeveloperRepository;
 import com.vz89.hometask.repository.SkillRepository;
+import com.vz89.hometask.repository.db.DbAccountRepositoryImpl;
+import com.vz89.hometask.repository.db.DbDeveloperRepositoryImpl;
+import com.vz89.hometask.repository.db.DbSkillRepositoryImpl;
 import com.vz89.hometask.repository.json.JsonAccountRepositoryImpl;
 import com.vz89.hometask.repository.json.JsonDeveloperRepositoryImpl;
 import com.vz89.hometask.repository.json.JsonSkillRepositoryImpl;
@@ -14,9 +17,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DeveloperServiceImpl implements DeveloperService {
-    private DeveloperRepository developerRepository = new JsonDeveloperRepositoryImpl();
-    private AccountRepository accountRepository = new JsonAccountRepositoryImpl();
-    private SkillRepository skillRepository = new JsonSkillRepositoryImpl();
+    private DeveloperRepository developerRepository = new DbDeveloperRepositoryImpl();
+    private AccountRepository accountRepository = new DbAccountRepositoryImpl();
+    private SkillRepository skillRepository = new DbSkillRepositoryImpl();
 
     @Override
     public Developer getById(Long id) {

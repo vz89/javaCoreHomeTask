@@ -18,6 +18,13 @@ public class Developer {
         this.skills = skills;
     }
 
+    public Developer(Long id, String firstName, String lastName, Account account) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.account = account;
+    }
+
     public Developer(Long id, String firstName, String lastName, Set<Skill> skills, Account account) {
         this.id = id;
         this.firstName = firstName;
