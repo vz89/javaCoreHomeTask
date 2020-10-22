@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,11 +38,11 @@ public class DbDeveloperRepositoryImpl implements DeveloperRepository {
             }
             resultSet = statement.executeQuery("SELECT * FROM developer_skill WHERE developer_id='" + id + "'");
             Set<Skill> skills = new HashSet<>();
-            developer.setSkills(skills);
             while (resultSet.next()) {
                 long skillId = resultSet.getLong("skill_id");
-                developer.getSkills().add(skillRepository.getById(skillId));
+                skills.add(skillRepository.getById(skillId));
             }
+            developer.setSkills(skills);
             resultSet.close();
             statement.close();
             connection.close();
@@ -53,7 +54,34 @@ public class DbDeveloperRepositoryImpl implements DeveloperRepository {
 
     @Override
     public List<Developer> findAll() {
-        return null;
+        List<Developer> developers = new ArrayList<>();
+        try {
+            connection = dbService.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM developer");
+            while (resultSet.next()) {
+                long developerId = resultSet.getLong("id");
+                String first_name = resultSet.getString("first_name");
+                String last_name = resultSet.getString("last_name");
+                long account_id = resultSet.getLong("account_id");
+                developers.add(new Developer(developerId, first_name, last_name, accountRepository.getById(account_id)));
+            }
+            for (Developer developer : developers) {
+                resultSet = statement.executeQuery("SELECT * FROM developer_skill WHERE developer_id='" + developer.getId() + "'");
+                Set<Skill> skills = new HashSet<>();
+                while (resultSet.next()) {
+                    long skillId = resultSet.getLong("skill_id");
+                    skills.add(skillRepository.getById(skillId));
+                }
+                developer.setSkills(skills);
+            }
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return developers;
     }
 
     @Override
