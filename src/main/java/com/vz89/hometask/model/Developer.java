@@ -78,10 +78,17 @@ public class Developer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Developer developer = (Developer) o;
-        return id.equals(developer.id) &&
+        if (id == null) {
+            return id == developer.id &&
+                    firstName.equals(developer.firstName) &&
+                    lastName.equals(developer.lastName) &&
+                    account.equals(developer.account);
+        } else return id.equals(developer.id) &&
                 firstName.equals(developer.firstName) &&
                 lastName.equals(developer.lastName) &&
                 account.equals(developer.account);
+
+
     }
 
     @Override

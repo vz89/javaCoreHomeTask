@@ -13,6 +13,10 @@ public class AccountServiceImpl implements AccountService {
         accountRepository = RepositoryTypeService.getAccountRepoType();
     }
 
+    public AccountServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
     @Override
     public Account getById(Long id) {
         return accountRepository.getById(id);
@@ -37,6 +41,5 @@ public class AccountServiceImpl implements AccountService {
     public void delete(Long id) {
         accountRepository.deleteById(id);
     }
-
 
 }

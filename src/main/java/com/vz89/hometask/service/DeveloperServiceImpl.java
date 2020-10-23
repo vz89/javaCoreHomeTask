@@ -5,12 +5,6 @@ import com.vz89.hometask.model.Skill;
 import com.vz89.hometask.repository.AccountRepository;
 import com.vz89.hometask.repository.DeveloperRepository;
 import com.vz89.hometask.repository.SkillRepository;
-import com.vz89.hometask.repository.db.DbAccountRepositoryImpl;
-import com.vz89.hometask.repository.db.DbDeveloperRepositoryImpl;
-import com.vz89.hometask.repository.db.DbSkillRepositoryImpl;
-import com.vz89.hometask.repository.json.JsonAccountRepositoryImpl;
-import com.vz89.hometask.repository.json.JsonDeveloperRepositoryImpl;
-import com.vz89.hometask.repository.json.JsonSkillRepositoryImpl;
 
 import java.util.List;
 import java.util.Set;
@@ -20,6 +14,12 @@ public class DeveloperServiceImpl implements DeveloperService {
     private final DeveloperRepository developerRepository;
     private final AccountRepository accountRepository;
     private final SkillRepository skillRepository;
+
+    public DeveloperServiceImpl(DeveloperRepository developerRepository, AccountRepository accountRepository, SkillRepository skillRepository) {
+        this.developerRepository = developerRepository;
+        this.accountRepository = accountRepository;
+        this.skillRepository = skillRepository;
+    }
 
     public DeveloperServiceImpl() {
         developerRepository = RepositoryTypeService.getDeveloperRepoType();

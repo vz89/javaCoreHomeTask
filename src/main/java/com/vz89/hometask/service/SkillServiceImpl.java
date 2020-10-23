@@ -12,6 +12,10 @@ public class SkillServiceImpl implements SkillService {
         skillRepository = RepositoryTypeService.getSkillRepoType();
     }
 
+    public SkillServiceImpl(SkillRepository skillRepository) {
+        this.skillRepository = skillRepository;
+    }
+
     @Override
     public Skill getById(Long readLong) {
         return skillRepository.getById(readLong);
