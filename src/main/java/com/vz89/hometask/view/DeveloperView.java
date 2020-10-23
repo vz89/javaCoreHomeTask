@@ -21,6 +21,7 @@ public class DeveloperView {
         IOService.write("update - изменить имя и фамилию существующего Developer");
         IOService.write("updateSkills - изменить навыки Developer");
         IOService.write("delete - удалить существующего Developer");
+        IOService.write("exit - выход из подсистемы Developer");
 
         String command = "";
 

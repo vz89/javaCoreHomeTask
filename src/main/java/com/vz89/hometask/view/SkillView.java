@@ -14,6 +14,7 @@ public class SkillView {
         IOService.write("create - создать новый Skill");
         IOService.write("update - изменить существующий скилл Skill");
         IOService.write("delete - удалить существующий скилл Skill");
+        IOService.write("exit - выход из подсистемы Skill");
 
         String command = "";
 

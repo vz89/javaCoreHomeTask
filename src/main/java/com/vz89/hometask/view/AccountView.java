@@ -15,6 +15,7 @@ public class AccountView {
         IOService.write("create - создать новый Account");
         IOService.write("update - изменить cтатус существующего Account");
         IOService.write("delete - удалить существующий аккаунт Account");
+        IOService.write("exit - выход из подсистемы Account");
 
         String command = "";
 
