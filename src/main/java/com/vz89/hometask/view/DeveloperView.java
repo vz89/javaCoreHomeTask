@@ -10,6 +10,8 @@ public class DeveloperView {
     private DeveloperController developerController = new DeveloperController();
     private AccountController accountController = new AccountController();
     private SkillController skillController = new SkillController();
+    private RunnerView runnerView = new RunnerView();
+
 
     public void run() {
         IOService.write("Введите одну из команд: ");
@@ -70,5 +72,6 @@ public class DeveloperView {
                     break;
             }
         }
+        runnerView.run();
     }
 }

@@ -5,6 +5,7 @@ import com.vz89.hometask.service.IOService;
 
 public class SkillView {
     private SkillController skillController = new SkillController();
+    private RunnerView runnerView = new RunnerView();
 
     public void run() {
         IOService.write("Введите одну из команд: ");
@@ -45,5 +46,6 @@ public class SkillView {
                     break;
             }
         }
+        runnerView.run();
     }
 }

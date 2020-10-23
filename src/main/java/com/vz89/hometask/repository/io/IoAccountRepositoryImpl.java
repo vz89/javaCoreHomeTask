@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class AccountRepositoryImpl implements AccountRepository {
+public class IoAccountRepositoryImpl implements AccountRepository {
 
     private static final String ACCOUNTS_TXT = "/files/accounts.txt";
     private static final String DELIMITER = ";";
@@ -120,6 +120,6 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     private URI getUri() throws URISyntaxException {
-        return AccountRepositoryImpl.class.getResource(ACCOUNTS_TXT).toURI();
+        return IoAccountRepositoryImpl.class.getResource(ACCOUNTS_TXT).toURI();
     }
 }

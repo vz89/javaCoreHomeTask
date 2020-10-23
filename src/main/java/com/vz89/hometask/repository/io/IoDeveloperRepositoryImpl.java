@@ -19,9 +19,9 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DeveloperRepositoryImpl implements DeveloperRepository {
-    private AccountRepository accountRepository = new AccountRepositoryImpl();
-    private SkillRepository skillRepository = new SkillRepositoryImpl();
+public class IoDeveloperRepositoryImpl implements DeveloperRepository {
+    private AccountRepository accountRepository = new IoAccountRepositoryImpl();
+    private SkillRepository skillRepository = new IoSkillRepositoryImpl();
 
     private static final String DEVELOPER_TXT = "/files/developers.txt";
     private static final String DELIMITER = ";";
@@ -134,7 +134,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     }
 
     private URI getUri() throws URISyntaxException {
-        return DeveloperRepositoryImpl.class.getResource(DEVELOPER_TXT).toURI();
+        return IoDeveloperRepositoryImpl.class.getResource(DEVELOPER_TXT).toURI();
     }
 
 }

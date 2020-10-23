@@ -17,9 +17,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class DeveloperServiceImpl implements DeveloperService {
-    private DeveloperRepository developerRepository = new DbDeveloperRepositoryImpl();
-    private AccountRepository accountRepository = new DbAccountRepositoryImpl();
-    private SkillRepository skillRepository = new DbSkillRepositoryImpl();
+    private final DeveloperRepository developerRepository;
+    private final AccountRepository accountRepository;
+    private final SkillRepository skillRepository;
+
+    public DeveloperServiceImpl() {
+        developerRepository = RepositoryTypeService.getDeveloperRepoType();
+        accountRepository = RepositoryTypeService.getAccountRepoType();
+        skillRepository = RepositoryTypeService.getSkillRepoType();
+    }
 
     @Override
     public Developer getById(Long id) {

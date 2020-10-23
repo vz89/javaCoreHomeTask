@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class SkillRepositoryImpl implements SkillRepository {
+public class IoSkillRepositoryImpl implements SkillRepository {
 
     private static final String SKILLS_TXT = "/files/skills.txt";
     private static final String DELIMITER = ";";
@@ -116,6 +116,6 @@ public class SkillRepositoryImpl implements SkillRepository {
     }
 
     private URI getUri() throws URISyntaxException {
-        return SkillRepositoryImpl.class.getResource(SKILLS_TXT).toURI();
+        return IoSkillRepositoryImpl.class.getResource(SKILLS_TXT).toURI();
     }
 }

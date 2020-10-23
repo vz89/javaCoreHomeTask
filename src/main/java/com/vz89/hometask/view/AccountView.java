@@ -6,6 +6,7 @@ import com.vz89.hometask.service.IOService;
 
 public class AccountView {
     private AccountController accountController = new AccountController();
+    private RunnerView runnerView = new RunnerView();
 
     public void run() {
         IOService.write("Введите одну из команд: ");
@@ -46,5 +47,6 @@ public class AccountView {
                     break;
             }
         }
+        runnerView.run();
     }
 }
