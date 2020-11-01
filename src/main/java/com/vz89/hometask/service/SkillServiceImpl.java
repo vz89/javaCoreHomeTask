@@ -17,8 +17,8 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public Skill getById(Long readLong) {
-        return skillRepository.getById(readLong);
+    public Skill getById(Long id) {
+        return skillRepository.getById(id);
     }
 
     @Override

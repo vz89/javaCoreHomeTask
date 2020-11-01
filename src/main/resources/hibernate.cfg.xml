@@ -8,6 +8,8 @@
         <property name="hibernate.show_sql">true</property>
 
         <mapping class="com.vz89.hometask.model.Skill"/>
+        <mapping class="com.vz89.hometask.model.Account"/>
+        <mapping class="com.vz89.hometask.model.Developer"/>
 
     </session-factory>
 </hibernate-configuration>

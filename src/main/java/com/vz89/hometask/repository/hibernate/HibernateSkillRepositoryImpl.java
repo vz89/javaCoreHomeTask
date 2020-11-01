@@ -17,8 +17,7 @@ public class HibernateSkillRepositoryImpl implements SkillRepository {
 
         try {
             session = HibernateUtils.getSessionFactory().openSession();
-            session.beginTransaction();
-            skill = session.load(Skill.class, id);
+            skill = session.get(Skill.class, id);
         } catch (Exception e) {
             System.out.println("Сan't find Skill by id");
         } finally {
