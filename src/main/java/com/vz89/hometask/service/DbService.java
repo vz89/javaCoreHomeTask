@@ -1,6 +1,6 @@
 package com.vz89.hometask.service;
 
-import com.vz89.hometask.config.PropertiesReader;
+import com.vz89.hometask.utils.PropertiesReader;
 
 import java.io.IOException;
 import java.sql.Connection;

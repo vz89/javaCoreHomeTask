@@ -79,7 +79,7 @@ public class DbSkillRepositoryImpl implements SkillRepository {
         try {
             connection = dbService.getConnection();
             Statement statement = connection.createStatement();
-            statement.executeUpdate("UPDATE skill SET skill_name='" + skill.getId() + "' WHERE id='" + skill.getId() + "'");
+            statement.executeUpdate("UPDATE skill SET skill_name='" + skill.getName() + "' WHERE id='" + skill.getId() + "'");
             statement.close();
             connection.close();
         } catch (SQLException e) {

@@ -1,9 +1,18 @@
 package com.vz89.hometask.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+
+@Entity
+@Table(name = "skill")
 public class Skill {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "skill_name")
     private String name;
 
     public Skill(String name) {
@@ -16,10 +25,6 @@ public class Skill {
     public Skill(Long id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Skill(Skill skill) {
-
     }
 
     public Long getId() {

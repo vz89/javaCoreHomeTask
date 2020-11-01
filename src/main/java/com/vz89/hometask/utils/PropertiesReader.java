@@ -1,4 +1,4 @@
-package com.vz89.hometask.config;
+package com.vz89.hometask.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

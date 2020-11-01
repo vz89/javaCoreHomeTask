@@ -6,6 +6,9 @@ import com.vz89.hometask.repository.SkillRepository;
 import com.vz89.hometask.repository.db.DbAccountRepositoryImpl;
 import com.vz89.hometask.repository.db.DbDeveloperRepositoryImpl;
 import com.vz89.hometask.repository.db.DbSkillRepositoryImpl;
+import com.vz89.hometask.repository.hibernate.HibernateAccountRepositoryImpl;
+import com.vz89.hometask.repository.hibernate.HibernateDeveloperRepositoryImpl;
+import com.vz89.hometask.repository.hibernate.HibernateSkillRepositoryImpl;
 import com.vz89.hometask.repository.io.IoAccountRepositoryImpl;
 import com.vz89.hometask.repository.io.IoDeveloperRepositoryImpl;
 import com.vz89.hometask.repository.io.IoSkillRepositoryImpl;
@@ -34,6 +37,11 @@ public class RepositoryTypeService {
                 RepositoryTypeService.accountRepository = new IoAccountRepositoryImpl();
                 RepositoryTypeService.developerRepository = new IoDeveloperRepositoryImpl();
                 RepositoryTypeService.skillRepository = new IoSkillRepositoryImpl();
+                break;
+            case ("hb"):
+                RepositoryTypeService.accountRepository = new HibernateAccountRepositoryImpl();
+                RepositoryTypeService.developerRepository = new HibernateDeveloperRepositoryImpl();
+                RepositoryTypeService.skillRepository = new HibernateSkillRepositoryImpl();
                 break;
             default:
                 RepositoryTypeService.accountRepository = new DbAccountRepositoryImpl();

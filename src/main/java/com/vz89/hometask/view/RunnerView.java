@@ -6,7 +6,7 @@ import com.vz89.hometask.service.RepositoryTypeService;
 public class RunnerView {
 
     public void start() {
-        System.out.println("Введите тип источника данных, с которым будете работать: db,json,io");
+        System.out.println("Введите тип источника данных, с которым будете работать: db, json, io, hb");
         String entity = IOService.read();
         RepositoryTypeService.setRepositoryType(entity);
         run();
@@ -27,5 +27,6 @@ public class RunnerView {
             DeveloperView DeveloperView = new DeveloperView();
             DeveloperView.run();
         }
+
     }
 }
