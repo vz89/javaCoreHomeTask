@@ -1,13 +1,35 @@
 package com.vz89.hometask.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "developer")
+@NamedEntityGraph(name = "account_entity_graph", attributeNodes = {@NamedAttributeNode("account"),@NamedAttributeNode("skills")})
 public class Developer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "developer_skill",
+            joinColumns = {@JoinColumn(name = "developer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+    )
     private Set<Skill> skills;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id")
     private Account account;
 
     public Developer() {
