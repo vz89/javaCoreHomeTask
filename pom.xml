@@ -78,6 +78,7 @@
                     <username>${db.username}</username>
                     <password>${db.password}</password>
                     <url>${db.url}</url>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                 </configuration>
                 <executions>
                     <execution>
