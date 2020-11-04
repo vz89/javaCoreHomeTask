@@ -1,1 +1,6 @@
 language: java
+services:
+  - mysql
+before_script:
+  - mysql -e 'DROP DATABASE IF EXISTS hometaskbase'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS hometaskbase'' - mysql -u root
