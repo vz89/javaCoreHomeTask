@@ -74,8 +74,8 @@ public class HibernateAccountRepositoryImpl implements AccountRepository {
         try {
             session = HibernateUtils.getSessionFactory().openSession();
             session.beginTransaction();
-            account.setName(session.get(Account.class,account.getId()).getName());
-            session.merge(account); //update не сохраняет в базу??
+            account.setName(session.get(Account.class, account.getId()).getName());
+            session.merge(account);
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("can't update account");
