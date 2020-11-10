@@ -1,15 +1,12 @@
 package com.vz89.hometask.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "developer")
-@NamedEntityGraph(name = "account_entity_graph", attributeNodes = {@NamedAttributeNode("account"),@NamedAttributeNode("skills")})
+@NamedEntityGraph(name = "account_entity_graph", attributeNodes = {@NamedAttributeNode("account"), @NamedAttributeNode("skills")})
 public class Developer {
 
     @Id
@@ -20,7 +17,7 @@ public class Developer {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "developer_skill",
             joinColumns = {@JoinColumn(name = "developer_id")},
@@ -28,7 +25,7 @@ public class Developer {
     )
     private Set<Skill> skills;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
 
