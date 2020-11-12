@@ -17,9 +17,9 @@ import com.vz89.hometask.repository.json.JsonDeveloperRepositoryImpl;
 import com.vz89.hometask.repository.json.JsonSkillRepositoryImpl;
 
 public class RepositoryTypeService {
-    private static AccountRepository accountRepository;
-    private static DeveloperRepository developerRepository;
-    private static SkillRepository skillRepository;
+    private static AccountRepository accountRepository = new HibernateAccountRepositoryImpl();
+    private static DeveloperRepository developerRepository = new HibernateDeveloperRepositoryImpl();
+    private static SkillRepository skillRepository = new HibernateSkillRepositoryImpl();
 
     public static void setRepositoryType(String type) {
         switch (type) {
@@ -44,9 +44,9 @@ public class RepositoryTypeService {
                 RepositoryTypeService.skillRepository = new HibernateSkillRepositoryImpl();
                 break;
             default:
-                RepositoryTypeService.accountRepository = new DbAccountRepositoryImpl();
-                RepositoryTypeService.developerRepository = new DbDeveloperRepositoryImpl();
-                RepositoryTypeService.skillRepository = new DbSkillRepositoryImpl();
+                RepositoryTypeService.accountRepository = new HibernateAccountRepositoryImpl();
+                RepositoryTypeService.developerRepository = new HibernateDeveloperRepositoryImpl();
+                RepositoryTypeService.skillRepository = new HibernateSkillRepositoryImpl();
                 break;
         }
     }
