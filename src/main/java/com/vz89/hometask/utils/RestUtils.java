@@ -20,11 +20,11 @@ public class RestUtils {
         Matcher matcher = regExIdPattern.matcher(pathInfo);
         if (matcher.find()) {
             id = Long.parseLong(matcher.group());
-            getRequestType = GetRequestType.GET_BY_ID;
+            getRequestType = GetRequestType.WITH_PARAMS;
             return;
         }
         if (regExAllPattern.matcher(pathInfo).find()) {
-            getRequestType = GetRequestType.FIND_ALL;
+            getRequestType = GetRequestType.NO_PARAMS;
             return;
         }
         throw new ServletException("Invalid URI");
