@@ -10,9 +10,25 @@
         <servlet-name>skillServlet</servlet-name>
         <servlet-class>com.vz89.hometask.controller.SkillServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>accountServlet</servlet-name>
+        <servlet-class>com.vz89.hometask.controller.AccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>developerServlet</servlet-name>
+        <servlet-class>com.vz89.hometask.controller.DeveloperServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>skillServlet</servlet-name>
         <url-pattern>/skills/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accountServlet</servlet-name>
+        <url-pattern>/accounts/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>developerServlet</servlet-name>
+        <url-pattern>/developers/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
