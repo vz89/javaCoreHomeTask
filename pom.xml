@@ -10,9 +10,9 @@
     <packaging>war</packaging>
     <properties>
         <db.port>3306</db.port>
-        <db.username>root</db.username>
-        <db.password>root</db.password>
-        <db.url>jdbc:mysql://localhost:3306/hometaskbase?serverTimezone=Europe/Moscow</db.url>
+        <db.username>bbc9f7b3ba92b1</db.username>
+        <db.password>773ee41d</db.password>
+        <db.url>jdbc:mysql://us-cdbr-east-02.cleardb.com/heroku_eb8e96d4adc735b?reconnect=true</db.url>
         <db.driver>com.mysql.cj.jdbc.Driver</db.driver>
     </properties>
 
