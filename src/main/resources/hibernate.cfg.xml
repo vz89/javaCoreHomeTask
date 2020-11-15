@@ -1,9 +1,9 @@
 <hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
     <session-factory>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hometaskbase?serverTimezone=Europe/Moscow</property>
+        <property name="hibernate.connection.url">jdbc:mysql://us-cdbr-east-02.cleardb.com/heroku_eb8e96d4adc735b?reconnect=true</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.username">bbc9f7b3ba92b1</property>
+        <property name="hibernate.connection.password">773ee41d</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.show_sql">true</property>
 
