@@ -24,3 +24,5 @@ Account -> AccountStatus
 Для автоматизации и сборки используется Travis.
 
 Также в приложении реализован REST API с использованием Servlet. Рабочее приложением развернуто на heroku.com 
+
+Используемые технологии: Java, StreamAPI, JDBC, IO/NIO, Hibernate, Servlet,  
